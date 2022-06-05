@@ -1,17 +1,30 @@
+//******************************************************************************************************************************* */
+//******************************************************************************************************************************* */
 //## Ejercicio #1
 // Escribir una función que tome un arreglo de números y devuelva el número mayor de la lista. 
 // Ejemplo del arreglo : [3, 5, 7, 1, 6]
-
 let num1 = [3,5,7,1,6];
-console.log("Resultado",num1.sort((a,b) => b-a )[0]); // 3[5,7,6,3,1], 5[7,6,5,3,1], 7[7,6,5,3,1]
-//console.log(num[0]);
-
+mayor(num1);
+function mayor (array)
+{
+console.log("El número mayor de la lista es: ",array.sort((a,b) => b-a )[0]); // 3[5,7,6,3,1], 5[7,6,5,3,1], 7[7,6,5,3,1]
+return array;
+};
+//******************************************************************************************************************************* */
+//******************************************************************************************************************************* */
 // ## Ejercicio #2
 // María llega a su entrevista de trabajo para el rol de Desarrollador Junior y se le pide que resuelva este problema:
 // Dada una lista de números [-1, 3, 4, 2, 6], escribe una función en javascript para calcular el número más pequeño.
 let num2 = [-1, 3, 4, 2, 6];
-console.log("resultado", num2.sort((a,b) => a-b)[0]);
-
+minimo(num2);
+function minimo(array)
+{
+console.log("El número menor de la lista es: ", array.sort()[0]);
+//console.log(array);
+return array;
+};
+//******************************************************************************************************************************* */
+//******************************************************************************************************************************* */
 // ## Ejercicio #3
 // Escribir una función que permita saber si un número se repite dentro de un arreglo.
 
@@ -27,84 +40,63 @@ console.log("resultado", num2.sort((a,b) => a-b)[0]);
 // [1, 22, 5, 14, 24, 31, 27, 15, 105]
 
 let num3 = [1, 22, 5, 17, 10, 5, 40, 5]; //8 elementos
-
-//let i=0;
-let x=num3.length-1
-let y=[];
-let contador2 =0;
-// let found = num3.find(element => element == num3[5] );
-// console.log ("Found", found);
-for (x ;  x >=0; x--) 
+num3.sort((a,b) =>
 {
-    //console.log(x);
-    //console.log(num3[x]);
-    let n=0;
-    let contador=0;
-
-while (n<=x) 
+    return a-b;
+});
+//console.log(num3);
+let x = num3.length-1;
+let y=[];
+let z=0;
+while(z<=num3.length)
+{
+    let prueba = false;
+    let contador = 0;
+    for(let i=0;i<=x ;i++)
     {
-        //console.log("posición", x);
-        if(num3[x]==num3[n] && x != n)
+        
+        if(num3[z]==num3[i] && z!=i)
         {
-            let m= y.push(num3[x]);
-            console.log("invento", y);
             contador++
-            //console.log(num3[x]);
-            //console.log(num3[n]);
-            if(contador>=1)
-            {
-                contador2++
-            }
-        }
-        n++;
-        //x--;
+            prueba = true;
+            y=[num3[z]];
+            //console.log(y);
+        } 
     };
-    if (contador2>=1) {
-        //console.log("El número "+num3[x]+ " se repite: " + contador2); 
-    } 
-    
+    if(prueba==true)
+            {
+                console.log("El número "+y+ " se repite: " + contador);
+            };  
+    z++; 
 };
-
-
-// num3.forEach(element => {
-//     if (element[i]===element) {
-//         console.log("El número "+ element + " se repite")
-//     }
-//     //return console.log("Ningún número se repite");
-//     i++;
-// }, i);
-
+//******************************************************************************************************************************* */
+//******************************************************************************************************************************* */
 // ## Ejercicio #4
 // Escribir una función que tome un arreglo ordenado y devuelva un arreglo completamente desordenado
 // Entrada: [1, 2, 5, 14, 24, 31, 50, 105]
 // Posible salida: [105, 31, 14, 1, 2, 50, 24, 5]
 // Posible salida: [, , , 1, , 50, , ]
+//posible solución un if para floor y ceil
 
+let num5 = [1, 2, 5, 14, 24, 31, 50, 105];  //arreglo de números ordenados
+r=num5.length-1;                            //Longitud del arreglo de números
+let q=[];                                   // se creó un arreglo vacío para asignar los valores aleatoreos
 
-let num5 = [1, 2, 5, 14, 24, 31, 50, 105];
-r=num5.length-1;
-let q=[];
-
-while (q.length<= r)
+while (q.length<= r)                        //Ciclo para asignar valores al arreglo vacío con el mismo tamaño que el arreglo original
 {
-    let p = Math.random()*r;
-    //console.log(q.length);
-    let s=Math.floor(p);
-    for(let i=0; r>i;i++)
+    let s=Math.round(Math.random()*r);      // Se crea la posición aleatoria del arreglo original y así tomar el número en esa posición
+    //console.log("aleatorio",num5[s]);
+    for(let i=0; r>=i;i++)                  //For para verificar y comparar los números del arreglo original y el nuevo
     {
-        console.log(num5[s]);
-        //console.log(i);
-        if(q[i]!=num5[s] && q.length==i)
+       if(q[i]!=num5[s] && q.length==i)     //comparación para evitar asignar números repetidos
             {
-                q.push(num5[s]);
-                //q[i]=num5[s];
-                console.log(q);
+                q.push(num5[s]);            //push para asignar los nuevos valores aleatorios modificando la longitud del arreglo
+                //console.log(q);
                 break
-                
-            } else if (q[i]==num5[s])
+            } else if (q[i]==num5[s])       //Si el número aleatorio ya existe en la nueva cadena, se debe de salir para esocger otro
                 {
                     break;
                 }
     }
-
 };
+console.log("La lista desordenada es: "+ q);
